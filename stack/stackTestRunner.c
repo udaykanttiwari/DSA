@@ -119,6 +119,16 @@ int main(){
 		test_14_push_string_type_element_into_stack();
 	tearDown();
 	testEnded();
+	testStarted("test_15_resize_should_allocate_double_memory_when_stack_is_ful");
+	setup();
+		test_15_resize_should_allocate_double_memory_when_stack_is_ful();
+	tearDown();
+	testEnded();
+	testStarted("test_16_push_the_item_into_stack");
+	setup();
+		test_16_push_the_item_into_stack();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

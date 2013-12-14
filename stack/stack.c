@@ -3,23 +3,35 @@
 #include <memory.h>
 #include <stdlib.h>
 
-stack *create(int typeSize,int Max){
+stack *create(int typeSize,int length){
 	stack *stackInstance=calloc(sizeof(stack),1);
-	stackInstance->elements=calloc(typeSize,Max);
-	printf("size is=%d",sizeof(stackInstance->elements));
-	stackInstance->Max=Max;
+	stackInstance->elements=calloc(typeSize,length);
+	stackInstance->length=length;
 	stackInstance->top=-1;
 	stackInstance->typeSize=typeSize;
 	return stackInstance;
 };
+stack* resize(stack *stackInstance){
+	int length= stackInstance->length;
+	int size = stackInstance->typeSize;
+	stackInstance->elements = realloc(stackInstance->elements,(length*2)*size);
+	stackInstance->length = length*2;
+	return stackInstance;
+};
+
 int isEmpty(stack *stackInstance){
 	return stackInstance->top==-1;
 };
 int isFull(stack *stackInstance){
-	return stackInstance->top==stackInstance->Max;
+	int top = (stackInstance->top);
+	return top == stackInstance->length-1;
 }
 void push(stack *stackInstance,void* item){
-	int address,i;
+	int address,i,result;
+	result = isFull(stackInstance);
+	if(result==true){
+		resize(stackInstance);
+	};
 	stackInstance->top++;
 	address=(stackInstance->top)*(stackInstance->typeSize);
 	memcpy(stackInstance->elements+address,item,stackInstance->typeSize);
@@ -35,5 +47,5 @@ void  *pop(stack *stackInstance){
 };
 void dispose(stack *stackInstance){
 	free(stackInstance->elements);
-	free(stackInstance);
+	// free(stackInstance);
 };

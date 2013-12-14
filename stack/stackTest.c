@@ -6,17 +6,17 @@
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 stack *stackInstance;
 void tearDown(){
-	dispose(stackInstance);
+ 	dispose(stackInstance);
 };
 int areEqual(stack expected,stack actual){
-	int  result = actual.top == expected.top && actual.Max == expected.Max;
+	int  result = actual.top == expected.top && actual.length == expected.length;
 	if(!result)
 		return result;
-	return 0==memcmp(expected.elements,actual.elements,actual.Max*actual.typeSize);
+	return 0==memcmp(expected.elements,actual.elements,actual.length*actual.typeSize);
 };
 void test_1_create_should_give_max_size_5(){
 	stackInstance=create(sizeof(int),5);
-	ASSERT(5==stackInstance->Max);
+	ASSERT(5==stackInstance->length);
 };
 void test_2_create_should_create_a_stack_integer_of_5_elements(){
 	int a, elements[5]={0,0,0,0,0};
@@ -33,7 +33,6 @@ void test_3_push_the_item_into_stack(){
 	push(stackInstance,ptr);
 	ASSERT(areEqual(expected,*stackInstance));
 };
-
 
 void test_4_push_the_item_into_stack(){
 	int item=3;
@@ -143,7 +142,25 @@ void test_14_push_string_type_element_into_stack(){
 	push(stackInstance,ptr2);
 	ASSERT(areEqual(expected,*stackInstance));
 };
-
+void test_15_resize_should_allocate_double_memory_when_stack_is_ful(){
+	stack *reallocate;
+	stackInstance=create(sizeof(int ),5);
+	reallocate = resize(stackInstance);
+	ASSERT(reallocate->length==10);	
+};
+void test_16_push_the_item_into_stack(){
+	int item=5;	
+	int elements[]={5,5,5,5,5,5};
+	stack expected={elements,sizeof(int),6,5};	
+	stackInstance=create(sizeof(int),3);
+	push(stackInstance,&item);
+	push(stackInstance,&item);
+	push(stackInstance,&item);
+	push(stackInstance,&item);
+	push(stackInstance,&item);
+	push(stackInstance,&item);
+	ASSERT(areEqual(expected,*stackInstance));
+};
 
 
 
