@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <memory.h>
 
 typedef struct Node{
         void *data;
+        int priority;
         struct Node* next;
-        struct Node* pre;
 }node;
 
 typedef struct{
@@ -14,7 +13,5 @@ typedef struct{
 }list;
 
 list* create();
-int insert(list* , int , void*);
-int Remove(list* , int index);
-int findIndex(list*, void*,int);
-int length(list*);
+int enqueue(list*,int priority,void* data);
+int dequeue(list*);
