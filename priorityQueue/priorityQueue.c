@@ -16,6 +16,7 @@ int enqueue(list* listPtr,int priority,void* data){
         if(listPtr->length == 0){
                 createNode(nodePtr,data,priority);
                 listPtr->head = nodePtr;
+                printf("\n %d \n ",listPtr->head->priority);
                 listPtr->length +=1;
                 return 1;        
         }

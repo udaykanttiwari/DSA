@@ -59,6 +59,11 @@ int main(){
 		test_insert_process_in_insert_process();
 	tearDown();
 	testEnded();
+	testStarted("test_excuteProcess_should_excute_the_process");
+	setup();
+		test_excuteProcess_should_excute_the_process();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

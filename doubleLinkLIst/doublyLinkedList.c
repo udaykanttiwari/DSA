@@ -1,5 +1,6 @@
 #include "doublyLinkedList.h"
-
+#include <stdlib.h>
+#include <memory.h>
 list *create(){
         list* start = (list*)calloc(sizeof(list),1);
         start->length = 0;
@@ -50,7 +51,7 @@ int insertMiddle(node* nodePtr,void*data,list* start,node* temp,node* temp2,int 
         temp2->pre = nodePtr;
         start->length += 1;
         return 1;        
-}
+};
 
 int removeFirst(node*temp, list*start){
         temp = start->head;
@@ -92,11 +93,11 @@ int insert(list* start , int index , void* data){
         if(index > start->length+1) return 0;
                 if(start->head == NULL && index == 1)
                         return insertFirst(nodePtr,data,start);
-                else if(index == 1)
+                 if(index == 1)
                         return insertOnFirst(nodePtr,data,start); 
-                else if(index == start->length+1)
+                 if(index == start->length+1)
                         return insertLast(nodePtr,data,start,temp); 
-                else 
+                 
                         return insertMiddle(nodePtr,data,start,temp,temp2,index);
                 return 0;
 }
@@ -108,10 +109,10 @@ int Remove(list* start , int index){
                 return 0;
         if(index == 1)
                 return removeFirst(temp,start);
-        else if(index == start->length)
+         if(index == start->length)
                 return removeLast(temp,start);
-        else 
-                return removeMiddle(temp,temp2,start,index);
+         
+           else     return removeMiddle(temp,temp2,start,index);
         return 0;
 }
 
@@ -131,4 +132,4 @@ int findIndex(list* start, void* element, int elementSize){
                 temp=temp->next;
         }
         return 0;
-}
+};
