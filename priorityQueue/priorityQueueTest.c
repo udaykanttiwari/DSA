@@ -23,7 +23,6 @@ void test_enqueue_should_insert_first_int_element_with_priority(){
         ASSERT(answer == 1);
         ASSERT(*(int*)listPtr->head->data == 100);
 }
-
 void test_enqueue_should_insert_first_float_element_with_priority(){
         int answer;
         float data = 10.50;
