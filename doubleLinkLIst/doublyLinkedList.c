@@ -25,15 +25,14 @@ int insertOnFirst(node* nodePtr,void*data,list* start){
         start->head = nodePtr;
         start->length += 1;
         return 1;        
-}
-
+};
 int insertLast(node* nodePtr,void*data,list* start,node* temp){
         nodePtr->data = data;
         temp->next = start->head;
         while(temp->next!=NULL)
                 temp = temp->next;
         temp->next = nodePtr;
-        nodePtr->pre = temp;
+        nodePtr->prev = temp;
         start->length += 1;
         return 1;        
 }
@@ -46,9 +45,9 @@ int insertMiddle(node* nodePtr,void*data,list* start,node* temp,node* temp2,int 
                 temp = temp->next;
         temp2 = temp->next;
         temp->next = nodePtr;
-        nodePtr->pre = temp;
+        nodePtr->prev = temp;
         nodePtr->next = temp2;
-        temp2->pre = nodePtr;
+        temp2->prev = nodePtr;
         start->length += 1;
         return 1;        
 };
@@ -56,7 +55,7 @@ int insertMiddle(node* nodePtr,void*data,list* start,node* temp,node* temp2,int 
 int removeFirst(node*temp, list*start){
         temp = start->head;
         temp = temp->next;
-        free(temp->pre);
+        free(temp->prev);
         start->head = temp;
         start->length -= 1;
         return 1;        
@@ -66,7 +65,7 @@ int removeLast(node*temp, list*start){
         temp=start->head;
         while(temp->next!=NULL)
                 temp=temp->next;
-        temp=temp->pre;
+        temp=temp->prev;
         free(temp->next);
         start->length -= 1;
         return 1;
@@ -78,10 +77,10 @@ int removeMiddle(node*temp, node*temp2, list*start, int index){
         for(i=0;i<index-1;i++)
                 temp = temp->next;
         temp2 = temp->next;
-        temp = temp->pre;
+        temp = temp->prev;
         free(temp->next);
         temp->next = temp2;
-        temp2->pre = temp;
+        temp2->prev = temp;
         start->length -= 1;
         return 1;
 }

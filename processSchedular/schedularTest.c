@@ -1,39 +1,58 @@
-#include "testUtils.h"
 #include "schedular.h"
+#include "testUtils.h"
 
-//create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 list *start;
-process *processPtr;
+
+typedef char string[20];
+
 void test_create_should_create_start(){
-	start= create();
-	ASSERT(start->head == NULL);
-	ASSERT(start->length == 0);	
+        start= create();
+        ASSERT(start->head == NULL);
+        ASSERT(start->length == 0);        
 };
-void test_insert_process_in_insert_process(){
-	int result;
-	process Process = {20,"browser"};		
-	start= create();
-	result = insertProcess(start,3,&Process);
-	ASSERT(result == 1);
-	processPtr = start->head->data;
-	ASSERT(processPtr->Time == 20);
-	ASSERT(strcmp(processPtr->processName,"browser")==0);
 
+void test_insert_process_should_insert_one_process(){
+        int result;
+        process Process = {"browser",20};
+        start= create();
+        result = insertProcess(start,3,&Process);
+        ASSERT(result == 1);
 };
+
+void test_insert_process_should_insert_two_processes(){
+        int result;
+        process Process1 = {"browser",30}; 
+        process Process2 = {"browser1",10};                               
+        start= create();
+        result = insertProcess(start,3,&Process1);
+        result = insertProcess(start,4,&Process2);
+        ASSERT(result == 1);
+};
+
 void test_excuteProcess_should_excute_the_process(){
-	int result;
-	process process1 = {20,"browser"};
-	process process2 = {10,"browser2"};	
-	process process3 = {100,"browser3"};				
+        int result;
+    process Process1 = {"browser",10}; 
+    process Process2 = {"browser1",40};                               
+    start= create();
+    result = insertProcess(start,3,&Process1);    
+    result = insertProcess(start,5,&Process2);
+    result = excuteProcess(start);
+    ASSERT(result == 1);
+}
 
-	start= create(); 
-	result = insertProcess(start,3,&process1);
-	result = insertProcess(start,2,&process2);
-	result = insertProcess(start,1,&process3);
-	result = executeProcess(start);
-	ASSERT(result == 1);
-	processPtr = start->head->data;
-	ASSERT(processPtr->Time == 20);
-	ASSERT(strcmp(processPtr->processName,"browser")==0);
-
-};
+void test_excuteProcess_should_excute_five_process(){
+    int result;
+    process Process1 = {"browser",10}; 
+    process Process2 = {"vlc",20};
+    process Process3 = {"gcc",50};        
+    process Process4 = {"subline",5};                             
+    process Process5 = {"crome",45};                                                  
+    start= create();
+    result = insertProcess(start,3,&Process1);    
+    result = insertProcess(start,5,&Process2);
+    result = insertProcess(start,1,&Process3);
+    result = insertProcess(start,10,&Process4);
+    result = insertProcess(start,2,&Process5);
+    result = excuteProcess(start);
+    ASSERT(result == 1);
+}

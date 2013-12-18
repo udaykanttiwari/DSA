@@ -1,10 +1,11 @@
 #include "./include/priorityQueue.h"
-#include <string.h>
-typedef char string[20];
 
-typedef struct {
-	int Time;
-	string processName;
+typedef struct 
+{
+        char processName[20];
+        int Time;
+        int lifeCycle;
 }process;
-int insertProcess(list *,int ,void *);
-int executeProcess(list*);
+
+int insertProcess(list *start,int priority ,void * data);
+int excuteProcess(list* start);

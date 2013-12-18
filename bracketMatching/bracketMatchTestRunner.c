@@ -59,6 +59,16 @@ int main(){
 		test_2_bracket_match_should_not_match_bracketes_from_paragraph();
 	tearDown();
 	testEnded();
+	testStarted("test_3_bracket_match_should_match_bracketes_from_paragraph");
+	setup();
+		test_3_bracket_match_should_match_bracketes_from_paragraph();
+	tearDown();
+	testEnded();
+	testStarted("test_4_bracket_match_should_not_match_bracketes_from_paragraph");
+	setup();
+		test_4_bracket_match_should_not_match_bracketes_from_paragraph();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

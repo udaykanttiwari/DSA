@@ -20,7 +20,7 @@ stack* resize(stack *stackInstance){
 };
 
 int isEmpty(stack *stackInstance){
-	return stackInstance->top==-1;
+	return stackInstance->top == -1;
 };
 int isFull(stack *stackInstance){
 	int top = (stackInstance->top);
@@ -36,16 +36,16 @@ void push(stack *stackInstance,void* item){
 	address=(stackInstance->top)*(stackInstance->typeSize);
 	memcpy(stackInstance->elements+address,item,stackInstance->typeSize);
 };
-void  *pop(stack *stackInstance){
+int  pop(stack *stackInstance){
 	int address;void *popElement;
-	if(isEmpty(stackInstance)) return false;
+	if(isEmpty(stackInstance)) return 0;
 	popElement=calloc(stackInstance->typeSize,1);
 	address=(stackInstance->top)*(stackInstance->typeSize);
 	popElement=stackInstance->elements+address;
 	stackInstance->top--;
-	return popElement;
+	return 1;
 };
 void dispose(stack *stackInstance){
 	free(stackInstance->elements);
-	// free(stackInstance);
+	free(stackInstance);
 };

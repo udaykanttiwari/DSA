@@ -1,6 +1,6 @@
 #include "testUtils.h"
 #include "doublyLinkedList.h"
-
+#include <stdlib.h>
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 list* start;
 

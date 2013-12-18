@@ -14,17 +14,6 @@ typedef struct{
 }list;
 
 list* create();
-int insert(list* , int , void*);
-int Remove(list* , int index);
-int findIndex(list*, void*,int);
-int length(list*);
-int insertOnFirst(node* nodePtr,void*data,list* start);
-int insertFirst(node* nodePtr,void*data,list* start);
-int insertMiddle(node* nodePtr,void*data,list* start,node* temp,node* temp2,int index);
-int insertLast(node* nodePtr,void*data,list* start,node* temp);
-int removeFirst(node*temp, list*start);
-int removeLast(node*temp, list*start);
-int removeMiddle(node*temp, node*temp2, list*start, int index);
 int insert(list* start , int index , void* data);
 int Remove(list* start , int index);
 int length(list* start);
