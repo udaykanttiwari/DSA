@@ -1,1 +1,0 @@
-int insert(list *,int index,void *data);

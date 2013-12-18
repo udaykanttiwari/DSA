@@ -1,7 +1,6 @@
 #include "./include/priorityQueue.h"
 
-typedef struct 
-{
+typedef struct{
         char processName[20];
         int Time;
         int lifeCycle;
