@@ -8,12 +8,11 @@ void bubbleSort(void *element,int numberOfElements,int typeSize,compareFunc *com
 		
 		for(j=0;j<count-1;j++){
 			compareResult= compare((element+j*typeSize),(element+(j+1)*typeSize));			
-			if(compareResult == -1){
+			if(compareResult >0){
 				memcpy(temp,(element+j*typeSize),typeSize);
 				memcpy((element+j*typeSize),(element+(j+1)*typeSize),typeSize);
 				memcpy((element+(j+1)*typeSize),temp,typeSize);					
 			};
-
 		};
 		count--;
 	};

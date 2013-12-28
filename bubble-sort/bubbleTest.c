@@ -3,25 +3,25 @@
 #include <string.h>
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
-typedef char* string[20];
+typedef char string[20];
 
 int compareInt(void *first,void *second){
-	if(*(int *)first >*(int *)second) return -1;
-	if(*(int *)first <*(int *)second) return 1;
+	if(*(int *)first >*(int *)second) return 1;
+	if(*(int *)first <*(int *)second) return -1;
 };
 
 int compareDouble(void *first,void *second){
-	if(*(double *)first >*(double *)second) return -1;
-	if(*(double *)first <*(double *)second) return 1;
+	if(*(double *)first >*(double *)second) return 1;
+	if(*(double *)first <*(double *)second) return -1;
 };
 int compareFloat(void *first,void *second){
-	if(*(float*)first >*(float*)second) return -1;
-	if(*(float*)first <*(float*)second) return 1;
+	if(*(float*)first >*(float*)second) return 1;
+	if(*(float*)first <*(float*)second) return -1;
 };
 
 int compareChar(void *first,void *second){
-	if(*(char*)first >*(char*)second) return -1;
-	if(*(char*)first <*(char*)second) return 1;
+	if(*(char*)first >*(char*)second) return 1;
+	if(*(char*)first <*(char*)second) return -1;
 };
 
 int compareString(void *first,void *second){
@@ -70,8 +70,9 @@ void test_bubble_sort_should_sort_char_array_elements(){
 
 void test_bubble_sort_should_sort_string_array_elements(){
 
-	string elements[3] = {"def","abc","bac"};
+	string elements[3] = {"def","abc","bac"}; int result;
 	bubbleSort(elements,3,sizeof(string),compareString);
-	ASSERT(strcmp(elements[0],"abc"));
-	ASSERT(strcmp(elements[1],"bac"));
+	ASSERT(strcmp(elements[0],"abc") == 0);
+	ASSERT(strcmp(elements[1],"bac") == 0);
+	ASSERT(strcmp(elements[2],"def") == 0);
 };
