@@ -59,6 +59,21 @@ int main(){
 		test_bubble_sort_should_sort_Double_array_elements();
 	tearDown();
 	testEnded();
+	testStarted("test_bubble_sort_should_sort_float_array_elements");
+	setup();
+		test_bubble_sort_should_sort_float_array_elements();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_should_sort_char_array_elements");
+	setup();
+		test_bubble_sort_should_sort_char_array_elements();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_should_sort_string_array_elements");
+	setup();
+		test_bubble_sort_should_sort_string_array_elements();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

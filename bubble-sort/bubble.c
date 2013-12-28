@@ -17,4 +17,5 @@ void bubbleSort(void *element,int numberOfElements,int typeSize,compareFunc *com
 		};
 		count--;
 	};
+	free(temp);
 };
