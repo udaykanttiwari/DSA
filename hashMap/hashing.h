@@ -1,23 +1,13 @@
-#include "./include/arrayList.h"
-#include "./include/doublyLinkedLish.h"
-typedef int HashCodeGenerarater(void *key,int sizeofBucket);
+#include "./include/doublyLinkedList.h"
 
-typedef int Compare(void *first,void *second);
+typedef int (*compareFptr)(void* first, void* second);
+typedef int (*HashCodeGenerator)(void* key);
 
-typedef struct{
-	HashCodeGenerarater hashCodeGenerarater,
-	Compare comparater,
-	list *bucket
+typedef	struct {
+	void* buckets;	
+	int capacity;
+	HashCodeGenerator hash;
+    compareFptr compare;
 }HashMap;
 
-HashMap create_hash_map(HashCodeGenerarater* hashCodeGenerarater,Compare *comparater);
-
-put(HashMap * hashMapPtr, void *key , void *value);
-
-void *get(HashMap *hashMapPtr,void *key);
-
-int remove (HashMap *hashMapPtr,void *key);
-
-iterater keys(HashMap *);
-
-dispose();
+HashMap* createHashMap(HashCodeGenerator hash, compareFptr compare);
