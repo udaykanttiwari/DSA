@@ -49,9 +49,14 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_bubble_sort_should_array_elements");
+	testStarted("test_bubble_sort_should_sort_int_array_elements");
 	setup();
-		test_bubble_sort_should_array_elements();
+		test_bubble_sort_should_sort_int_array_elements();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_should_sort_Double_array_elements");
+	setup();
+		test_bubble_sort_should_sort_Double_array_elements();
 	tearDown();
 	testEnded();
 
