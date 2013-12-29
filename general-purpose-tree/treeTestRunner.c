@@ -89,6 +89,16 @@ int main(){
 		test_insert_should_not_insert_if_child_parents_is_not_availble();
 	tearDown();
 	testEnded();
+	testStarted("test_should_not_delete_if_root_node_is_not_present");
+	setup();
+		test_should_not_delete_if_root_node_is_not_present();
+	tearDown();
+	testEnded();
+	testStarted("test_searchNode_should_give_0_if_node_is_not_found");
+	setup();
+		test_searchNode_should_give_0_if_node_is_not_found();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

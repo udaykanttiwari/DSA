@@ -83,3 +83,33 @@ Iterator* getChildren(Tree* treePtr, void *parentData){
     iterator->next = &getNextChildData;
     return iterator;
 };
+int deleteNode(Tree* tree, void* dataToDelete){
+    TreeNode* parentNode;
+    TreeNode* nodeToSearch;
+    int index;
+    if(tree->root == NULL) return 0;
+    parentNode = tree->root;
+    if(((List*)(parentNode->children))->head == NULL){
+            tree->root = NULL;
+            return 1;
+    }
+    nodeToSearch = searchNode(tree,dataToDelete);
+    parentNode = nodeToSearch->parent;
+    if(nodeToSearch == NULL)return 0;
+    if(nodeToSearch->children->head != NULL) return 0;
+    index = getChildIndex(parentNode->children,dataToDelete,tree->compare);
+    if(index == -1) return 0;
+    return Remove(parentNode->children,index);
+};
+int getChildIndex(List* list,void* childData, compareFunc* compareFunc){
+    Iterator* iterator = getIterator(list);
+    TreeNode *ptNode;
+    int result;
+    while(iterator->hasNext(iterator)){
+        ptNode = iterator->next(iterator);
+        result = compareFunc(ptNode->data, childData);
+        if(result) return iterator->currentPosition;
+    }
+    return -1;
+};
+

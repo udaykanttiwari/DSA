@@ -91,10 +91,26 @@ void test_insert_should_insert_children_to_any_child(){
 
 void test_insert_should_not_insert_if_child_parents_is_not_availble(){
     Tree tree = createTree(compareInt	);
-    int res;
-    res = insertNode(&tree, NULL, &data[0]);
-    res = insertNode(&tree, &data[0] , &data[1]);
-    res = insertNode(&tree, &data[4] , &data[2]);
-    ASSERT(res == 0);        
+    int result;
+    result = insertNode(&tree, NULL, &data[0]);
+    result = insertNode(&tree, &data[0] , &data[1]);
+    result = insertNode(&tree, &data[4] , &data[2]);
+    ASSERT(result == 0);   
 };
+void test_should_not_delete_if_root_node_is_not_present(){
+    Tree tree = createTree(compareInt);
+    int result;
+    result = deleteNode(&tree,&data[0]);
+    ASSERT(result == 0);
+};
+void test_searchNode_should_give_0_if_node_is_not_found(){
+    Tree tree = createTree(compareInt);
+    int result;
+    insertNode(&tree, NULL, &data[0]);
+    insertNode(&tree, &data[0] , &data[1]);
+    insertNode(&tree, &data[1] ,&data[2]);
+    insertNode(&tree,&data[2],&data[3]);
+    result = searchNode(&tree,&data[4]);
+    ASSERT(result == 0);         
+}
 
