@@ -5,7 +5,6 @@
 void isort(void* base, size_t numberOfElements, size_t elementSize,
 compare comp) {
    int i, j;
-   void * temp1;
    void* temp = calloc(1, elementSize);
    void* elementToCompare;
    int comparisonResult;

@@ -7,7 +7,7 @@ ArrayList create(int capacity) {
 	list.capacity = capacity;
 	list.length = 0;
 	return list;
-}
+};
 
 void shiftElementsIfNeeded(ArrayList *list, int index){
 	int i;

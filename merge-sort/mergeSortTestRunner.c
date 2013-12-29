@@ -49,9 +49,19 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_merge_sorted_array_element");
+	testStarted("test_merge_integer_sorted_array_element");
 	setup();
-		test_merge_sorted_array_element();
+		test_merge_integer_sorted_array_element();
+	tearDown();
+	testEnded();
+	testStarted("test_merge_double_sorted_array_element");
+	setup();
+		test_merge_double_sorted_array_element();
+	tearDown();
+	testEnded();
+	testStarted("test_merge_char_sorted_array_element");
+	setup();
+		test_merge_char_sorted_array_element();
 	tearDown();
 	testEnded();
 

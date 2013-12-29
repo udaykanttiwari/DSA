@@ -58,7 +58,7 @@ int insertMiddle(Node* nodePtr,void*data,List* start,Node* temp,Node* temp2,int 
 int removeFirst(Node*temp, List*start){
         temp = start->head;
         temp = temp->next;
-        free(temp->pre);
+        free(start->head);
         start->head = temp;
         start->length -= 1;
         return 1;        
@@ -91,7 +91,7 @@ int removeMiddle(Node*temp, Node*temp2, List*start, int index){
 int insert(List* start , int index , void* data){
         Node* nodePtr = createNode();
         Node* temp = createNode();
-        Node* temp2 = createNode();
+        Node* temp2 = createNode();        
         if(index > start->length+1) return 0;
         if(start->head == NULL && index == 1)
                 return insertFirst(nodePtr,data,start);
@@ -109,7 +109,7 @@ int Remove(List* start , int index){
                 return 0;
         if(index == 1)
                 return removeFirst(temp,start);
-        else if(index == start->length)
+        if(index == start->length)
                 return removeLast(temp,start);
         return removeMiddle(temp,temp2,start,index);
 }

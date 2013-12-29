@@ -1,8 +1,8 @@
 #include "hashing.h"
 
-HashMap* createHashMap(HashCodeGenerator hash, compareFptr compare){
+HashMap* createHashMap(HashCodeGenerator *getHashCode, compareFptr *compare){
 	HashMap *hashMapPtr;
-	hashMapPtr->hash = hash;
+	hashMapPtr->getHashCode = HashCodeGenerator;
 	hashMapPtr->compare = compare;
 	hashMapPtr->capacity = 10;
 	hashMapPtr->buckets = (void *)calloc(10,sizeof(void *));
@@ -10,5 +10,5 @@ HashMap* createHashMap(HashCodeGenerator hash, compareFptr compare){
 };
 
 int put(HashMap* map,void* key,void* value){
-	
+	int index= map->getHashCode(key);
 };
