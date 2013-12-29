@@ -57,6 +57,8 @@ int insertNode(Tree* treePtr, void* parentData, void* data){
     };
     parentNode = searchNode(treePtr,parentData);
     if(parentNode == NULL) return 0;      
+    childNode = getNode(parentNode,data);
+    return insert(parentNode->children,1,childNode);
 };
 
 void* getNextChildData(Iterator* iterator){
@@ -70,8 +72,8 @@ void* getNextChildData(Iterator* iterator){
 };
 
 
-Iterator* getChildren(Tree* tree, void *parentData){
-    TreeNode* parentNode = searchNode(tree, parentData);
+Iterator* getChildren(Tree* treePtr, void *parentData){
+    TreeNode* parentNode = searchNode(treePtr, parentData);
     Iterator* iterator;
     if(!parentNode){
         iterator = getIterator(NULL);
