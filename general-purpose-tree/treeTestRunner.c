@@ -54,9 +54,14 @@ int main(){
 		test_1_to_create_tree_();
 	tearDown();
 	testEnded();
-	testStarted("test_2_insert_node_in_tree");
+	testStarted("test_2create_tree_and_insert_root_with_int_data");
 	setup();
-		test_2_insert_node_in_tree();
+		test_2create_tree_and_insert_root_with_int_data();
+	tearDown();
+	testEnded();
+	testStarted("test_to_create_tree_and_insert_root_with_an_char_data");
+	setup();
+		test_to_create_tree_and_insert_root_with_an_char_data();
 	tearDown();
 	testEnded();
 
