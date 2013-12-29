@@ -64,6 +64,21 @@ int main(){
 		test_merge_char_sorted_array_element();
 	tearDown();
 	testEnded();
+	testStarted("test_merge_string_sorted_array_element");
+	setup();
+		test_merge_string_sorted_array_element();
+	tearDown();
+	testEnded();
+	testStarted("test_merge_sort_shuld_sort_int_array");
+	setup();
+		test_merge_sort_shuld_sort_int_array();
+	tearDown();
+	testEnded();
+	testStarted("test_merge_sort_shuld_sort_double_element");
+	setup();
+		test_merge_sort_shuld_sort_double_element();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
