@@ -54,6 +54,11 @@ int main(){
 		test_createHashMap_shuld_create_hash_map();
 	tearDown();
 	testEnded();
+	testStarted("test_put_element_to_bucket");
+	setup();
+		test_put_element_to_bucket();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

@@ -12,7 +12,7 @@ int insert(ArrayList *list, int index, void* data);
 
 void* get(ArrayList *list, int index);
 
-void dispose(ArrayList *list);
+//void dispose(ArrayList *list);
 
 int  remove(ArrayList * list,int index);
 

@@ -16,28 +16,26 @@ TreeNode* getNode(TreeNode* parentNode,void *data){
 };
 
 TreeNode* compareNodes(List* list, compareFunc* compareFunc, void* parentData){
-    Iterator* iterator = getIterator(list);
+    Iterator *iteratorChild,*iterator = getIterator(list);
     TreeNode* treeNode,result;
-    Iterator* iteratorChild;
     List *listOfChildren = create();
     if (0 == iterator->hasNext(iterator)){
             return NULL;
-    }
+    };
     while(iterator->hasNext(iterator)){
         treeNode = (TreeNode*)iterator->next(iterator);
         if(compareFunc(treeNode->data,parentData)){
             return treeNode;
-        }
+        };
         if(treeNode->children->head != NULL){
             iteratorChild = getIterator(treeNode->children);
             while(iteratorChild->hasNext(iteratorChild)){
                 insert(listOfChildren, listOfChildren->length + 1, iteratorChild->next(iteratorChild));
-                }
-        }
-    }
+            };
+        };
+    };
     return compareNodes(listOfChildren,compareFunc,parentData);
 };
-
 TreeNode* searchNode(Tree* treePtr,void* parentData){
     TreeNode* parent;
     TreeNode* root = treePtr->root;
