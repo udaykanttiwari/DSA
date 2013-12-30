@@ -56,3 +56,12 @@ void test_put_element_to_bucket_and_it_should_give_null(){
   result = get(&hashMap,&key);
   ASSERT(result == NULL);
 };
+
+void test_put_element_to_bucket_remove_data_from_bucket(){
+  HashMap hashMap = createHashMap(hashCodeGenerater,comparater,10); 
+  void *data;int key =15412;
+  ASSERT(put(&hashMap, &uday.key, &uday.value) == 1);
+  ASSERT(put(&hashMap, &shital.key, &shital.value) == 1);
+  ASSERT(1==removeHashData(&hashMap, &key));
+  
+};

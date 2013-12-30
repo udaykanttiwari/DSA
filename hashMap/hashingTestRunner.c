@@ -74,6 +74,11 @@ int main(){
 		test_put_element_to_bucket_and_it_should_give_null();
 	tearDown();
 	testEnded();
+	testStarted("test_put_element_to_bucket_remove_data_from_bucket");
+	setup();
+		test_put_element_to_bucket_remove_data_from_bucket();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
