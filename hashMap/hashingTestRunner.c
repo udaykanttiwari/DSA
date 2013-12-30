@@ -59,6 +59,21 @@ int main(){
 		test_put_element_to_bucket();
 	tearDown();
 	testEnded();
+	testStarted("test_put_element_to_bucket_and_get_element");
+	setup();
+		test_put_element_to_bucket_and_get_element();
+	tearDown();
+	testEnded();
+	testStarted("test_put_element_to_bucket_and_get_element_udaykant");
+	setup();
+		test_put_element_to_bucket_and_get_element_udaykant();
+	tearDown();
+	testEnded();
+	testStarted("test_put_element_to_bucket_and_it_should_give_null");
+	setup();
+		test_put_element_to_bucket_and_it_should_give_null();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

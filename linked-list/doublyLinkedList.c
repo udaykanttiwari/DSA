@@ -144,7 +144,7 @@ void* next(Iterator* iterator){
         if(hasNext(iterator) == 0)return NULL;
         for(count=0;count<=iterator->currentPosition-1;count++){
                 temp = temp->next;
-        }
+        };
         ++iterator->currentPosition;
         return temp->data;
 }

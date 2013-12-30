@@ -43,6 +43,20 @@ int put(HashMap* hashMap,void* key,void* value){
     hashData->key=(void*)key;
     insert(temp->dList, temp->dList->length+1, hashData);
     it = getIterator((temp->dList));
-    data1 = it->next(it);
+    data1 = it->next(it);    
     return 1;
 };
+
+void *get(HashMap *hashMap,void *key){
+    int userKey=hashMap->getHashCode(key);
+    Bucket * temp=(Bucket*)hashMap->buckets[userKey];
+    Iterator *it = getIterator((temp->dList));
+    HashData * hashData;
+    while(it->hasNext(it)){
+        hashData = it->next(it);
+        if(hashMap->cmp(hashData->key,(void*)key)==0)
+            return hashData->value;
+    };
+    return NULL;
+};
+
