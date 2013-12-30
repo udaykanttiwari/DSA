@@ -60,3 +60,16 @@ void *get(HashMap *hashMap,void *key){
     return NULL;
 };
 
+int removeHashData(HashMap* hashMap, void* kay){
+    int userKey=hashMap->getHashCode(key);
+    Bucket * temp=(Bucket*)hashMap->buckets[userKey];
+    Iterator *it = getIterator((temp->dList));
+    HashData * hashData;
+    while(it->hasNext(it)){
+        hashData = it->next(it);
+        if(hashMap->cmp(hashData->key,(void*)key)==0)
+            Remove(temp->dList,count++);
+    };
+    return NULL;
+};
+
