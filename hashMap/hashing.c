@@ -25,9 +25,9 @@ HashMap createHashMap(HashCodeGenerator *getHashCode, compareKeys *cmp,int capac
 	Bucket start;
 	HashMap hashMap;int i;
 	void **base = createList(capacity);
-    for (i 	= 0; i < capacity; ++i)
+    for (i = 0; i < capacity; ++i)
         base[i]=createBucket();
-    hashMap.buckets = 	base;
+    hashMap.buckets = base;
     hashMap.getHashCode = getHashCode;
 	hashMap.cmp = cmp;
 	hashMap.capacity = capacity;
@@ -74,3 +74,6 @@ int removeHashData(HashMap* hashMap, void* key){
     return 0;
 };
 
+Iterator getKeys(HashMap* hashMap){
+
+};
