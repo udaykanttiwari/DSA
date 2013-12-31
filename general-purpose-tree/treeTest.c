@@ -29,13 +29,14 @@ void test_2_create_tree_and_insert_root_with_int_data(){
     iterator = getChildren(&tree, &data[0]);
     ASSERT(NULL == iterator->next(iterator));
     ASSERT(result == 1);
+    DisposeTree((List*)(tree.root));
 };
 void test_3_create_tree_and_insert_root_with_a_char_data(){
     Iterator* iterator;
     Tree tree = createTree(compareChar);
     char data = 'z';
     int result = insertNode(&tree, NULL, &data);
-    iterator = getChildren(&tree, &data);
+    iterator   = getChildren(&tree, &data);
     ASSERT(NULL == iterator->next(iterator));
     ASSERT(result == 1);
 };

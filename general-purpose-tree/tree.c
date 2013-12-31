@@ -19,7 +19,7 @@ TreeNode* compareNodes(List* list, compareFunc* compareFunc, void* parentData){
     Iterator *iteratorChild,*iterator = getIterator(list);
     TreeNode* treeNode,result;
     List *listOfChildren = create();
-    if (0 == iterator->hasNext(iterator)){
+    if(0 == iterator->hasNext(iterator)){
             return NULL;
     };
     while(iterator->hasNext(iterator)){
@@ -110,4 +110,14 @@ int getChildIndex(List* list,void* childData, compareFunc* compareFunc){
     }
     return -1;
 };
-
+void DisposeTree(List *list){
+    TreeNode* temp;
+    Iterator *it = getIterator(list);
+    while(it->hasNext(it)){
+        temp = it->next(it);
+        if(NULL != temp->children->head){
+            DisposeTree(temp->children);
+        }
+        dispose(temp->children);
+    };
+};
