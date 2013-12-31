@@ -164,9 +164,9 @@ void dispose(List* start){
         Node* temp2;
         temp = start->head;
         while(temp->next != NULL){
-                temp2 = temp;
-                temp = temp->next;
-                free(temp2);
-        }
+        temp2 = temp;
+        temp = temp->next;
+        free(temp2);
+};
         free(temp);
 }

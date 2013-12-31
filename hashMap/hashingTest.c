@@ -26,11 +26,15 @@ void test_createHashMap_shuld_create_hash_map(){
 	HashMap hashMap;
 	hashMap = createHashMap(hashCodeGenerater,comparater,10);
 	ASSERT(hashMap.capacity == 10);
+  disposeHash(&hashMap);
+  
 };
 void test_put_element_to_bucket(){
 	HashMap hashMap = createHashMap(hashCodeGenerater,comparater,10);	
   void *data;
 	ASSERT(put(&hashMap, &uday.key, &uday.value) == 1);
+  disposeHash(&hashMap);
+
 };
 
 void test_put_element_to_bucket_and_get_element(){
@@ -40,6 +44,8 @@ void test_put_element_to_bucket_and_get_element(){
 	ASSERT(put(&hashMap, &shital.key, &shital.value) == 1);
 	result = get(&hashMap,&shital.key);
 	ASSERT(strcmp(*(String*)result,"shital") == 0);
+  disposeHash(&hashMap);
+
 };
 
 void test_put_element_to_bucket_and_get_element_udaykant(){
@@ -49,6 +55,8 @@ void test_put_element_to_bucket_and_get_element_udaykant(){
 	ASSERT(put(&hashMap, &shital.key, &shital.value) == 1);
 	result = get(&hashMap,&uday.key);
 	ASSERT(strcmp(*(String*)result,"udaykant") == 0);
+  disposeHash(&hashMap);
+
 };
 
 void test_put_element_to_bucket_and_it_should_give_null(){
@@ -58,6 +66,8 @@ void test_put_element_to_bucket_and_it_should_give_null(){
   ASSERT(put(&hashMap, &shital.key, &shital.value) == 1);
   result = get(&hashMap,&key);
   ASSERT(result == NULL);
+  disposeHash(&hashMap);
+
 };
 
 void test_put_element_to_bucket_remove_data_from_bucket(){
@@ -66,7 +76,7 @@ void test_put_element_to_bucket_remove_data_from_bucket(){
   ASSERT(put(&hashMap, &uday.key, &uday.value) == 1);
   ASSERT(put(&hashMap, &shital.key, &shital.value) == 1);
   ASSERT(1==removeHashData(&hashMap, &key));
-
+  disposeHash(&hashMap);
 };
 void test_put_element_into_bucket_and_get_all_keys(){
   Iterator it;
@@ -87,5 +97,6 @@ void test_put_element_into_bucket_and_get_all_keys(){
   ASSERT(*(int *)key[1] == 12342);
   ASSERT(*(int *)key[2] == 23124);
   ASSERT(*(int *)key[3] == 23125);
+  disposeHash(&hashMap);
 
 };

@@ -87,5 +87,14 @@ Iterator getKeys(HashMap* hashMap){
     return *it;
 };
 
-
+void disposeHash(HashMap* hashMap){
+    Bucket * temp;
+    int i;
+    Iterator it;
+    for(i = 0; i < hashMap->capacity; ++i)        {
+        temp=(Bucket*)hashMap->buckets[i];
+        free(temp->dList);
+    };
+    free(hashMap->buckets);
+}
  
