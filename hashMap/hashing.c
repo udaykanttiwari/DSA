@@ -1,7 +1,5 @@
 #include "hashing.h"
 #include <stdlib.h>
-#include "./include/doublyLinkedList.h"
-typedef char string[256];
 
 typedef struct{
     void* key;
@@ -41,9 +39,7 @@ int put(HashMap* hashMap,void* key,void* value){
     HashData *hashData=malloc(sizeof(HashData));
     hashData->value=(void*)value;
     hashData->key=(void*)key;
-    insert(temp->dList, temp->dList->length+1, hashData);
-    it = getIterator((temp->dList));
-    data1 = it->next(it);    
+    insert(temp->dList, temp->dList->length+1, hashData);  
     return 1;
 };
 
@@ -75,5 +71,21 @@ int removeHashData(HashMap* hashMap, void* key){
 };
 
 Iterator getKeys(HashMap* hashMap){
-
+  int i;Bucket *temp;Iterator *it;
+  HashData *hashData;
+  List *keyList = (List *)malloc(sizeof(List));
+  keyList = create();
+   for(i = 0;i<hashMap->capacity;i++){
+        temp = (Bucket*)hashMap->buckets[i];
+        it= getIterator(temp->dList);        
+        while(it->hasNext(it)){
+            hashData = it->next(it);
+         insert(keyList, keyList->length+1, hashData->key);    
+        };
+    };
+    it = getIterator(keyList);
+    return *it;
 };
+
+
+ 

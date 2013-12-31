@@ -10,6 +10,9 @@ typedef struct{
 typedef char String[256];
 Intern uday = {15412,"udaykant"};
 Intern shital = {12342,"shital"};
+Intern sandesh = {23124,"sandesh"};
+Intern manish = {23125,"manish"};
+
 
 int hashCodeGenerater(void* key){
 	return  *(int*)key%10;
@@ -63,5 +66,26 @@ void test_put_element_to_bucket_remove_data_from_bucket(){
   ASSERT(put(&hashMap, &uday.key, &uday.value) == 1);
   ASSERT(put(&hashMap, &shital.key, &shital.value) == 1);
   ASSERT(1==removeHashData(&hashMap, &key));
-  
+
+};
+void test_put_element_into_bucket_and_get_all_keys(){
+  Iterator it;
+  Iterator *itPtr;int count = 0;
+  int* key[4];
+  HashMap hashMap = createHashMap(hashCodeGenerater,comparater,10); 
+  ASSERT(put(&hashMap, &uday.key, &uday.value) == 1);
+  ASSERT(put(&hashMap, &shital.key, &shital.value) == 1);
+  ASSERT(put(&hashMap, &sandesh.key, &sandesh.value) == 1);
+  ASSERT(put(&hashMap, &manish.key, &manish.value) == 1);
+  it = getKeys(&hashMap);
+  itPtr = &it;
+  while(itPtr->hasNext(itPtr)){
+      key[count] = itPtr->next(itPtr);
+      count++;
+  };
+  ASSERT(*(int *)key[0] == 15412);
+  ASSERT(*(int *)key[1] == 12342);
+  ASSERT(*(int *)key[2] == 23124);
+  ASSERT(*(int *)key[3] == 23125);
+
 };

@@ -7,9 +7,8 @@ void merge(void *left,void *right,void *base,int lengthOfleft,int lengthofRight,
 		if(cmp(left+i*typeSize,right+j*typeSize)){
 			memcpy(base+k*typeSize,left+i*typeSize,typeSize);
 			i++;
-		}
-		else
-			{
+		};
+		else{
 			memcpy(base+k*typeSize,right+j*typeSize,typeSize);
 			j++;
 		};
@@ -34,9 +33,9 @@ void mergeSort(void* base, int length, int typeSize, compare cmp){
         lenthOfLeft = mid;
         lenthOfRight = length-mid;
         for(i=0;i<mid;i++)
-                memcpy(left+i*typeSize,base+i*typeSize,typeSize);
+            memcpy(left+i*typeSize,base+i*typeSize,typeSize);
         for(i=mid;i<length;i++)
-                memcpy(right+typeSize*(i-mid),base+typeSize*i,typeSize);
+            memcpy(right+typeSize*(i-mid),base+typeSize*i,typeSize);
         mergeSort(left,lenthOfLeft,typeSize,cmp);
         mergeSort(right,lenthOfRight,typeSize,cmp);
         merge(left,right,base,lenthOfLeft,lenthOfRight,cmp,typeSize);

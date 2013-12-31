@@ -1,3 +1,4 @@
+#include "./include/doublyLinkedList.h"
 
 typedef int compareKeys(void* first, void* second);
 typedef int HashCodeGenerator(void* key);
@@ -13,4 +14,4 @@ HashMap createHashMap(HashCodeGenerator *getHashCode, compareKeys *cmp,int capac
 int put(HashMap* hashMap,void* key,void* value);
 void *get(HashMap *hashMap,void *key);
 int removeHashData(HashMap* hashMap, void* kay);
-Iterator getKeys(HashMap* map);
+Iterator getKeys(HashMap* hashMap);
