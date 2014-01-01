@@ -16,12 +16,14 @@ Bucket* createBucket(){
 	bucket->dList = create();
 	return bucket;
 };
+
 void *createList(int capacity){
 	void **base;
 	return base = calloc(sizeof(void*),capacity);
 };
+
 void **assignListToeveryBucket(int capacity){
-   int i; 
+    int i; 
     void **base = createList(capacity);
     for (i = 0; i < capacity; ++i)
     base[i]=createBucket();
@@ -37,6 +39,7 @@ HashMap createHashMap(HashCodeGenerator *getHashCode, compareKeys *cmp,int capac
 	hashMap.capacity = capacity;
 	return hashMap;
 };
+
 void ** reHashing(HashMap *hashMap){
     int i;void **base;
     hashMap->capacity = hashMap->capacity*2;
@@ -44,6 +47,7 @@ void ** reHashing(HashMap *hashMap){
     hashMap->buckets = assignListToeveryBucket(hashMap->capacity);;
     return hashMap->buckets;
 };
+
 HashData* createHashData(void *key ,void *value){
     HashData *hashData;
     hashData=malloc(sizeof(HashData));
@@ -51,6 +55,7 @@ HashData* createHashData(void *key ,void *value){
     hashData->key=(void*)key;
     return hashData;
 };
+
 void executeIterator(HashMap *hashMap,Iterator it,HashData *hashData,void *key,void *value){
     Iterator *itPtr = &it;
     put(hashMap,key,value);
@@ -59,6 +64,7 @@ void executeIterator(HashMap *hashMap,Iterator it,HashData *hashData,void *key,v
         put(hashMap,hashData->key,hashData->value);
     };
 };
+
 void checkForRehashing(HashMap *hashMap,Bucket *temp,HashData *hashData,void *key,void *value){
     Iterator it,*itPtr;
     if(temp->dList->length+1>2){
@@ -69,6 +75,7 @@ void checkForRehashing(HashMap *hashMap,Bucket *temp,HashData *hashData,void *ke
     };
     return ;
 };
+
 int put(HashMap* hashMap,void* key,void* value){
     int userKey=hashMap->getHashCode(key,hashMap->capacity);
     Bucket * temp; HashData *hashData;
@@ -78,6 +85,7 @@ int put(HashMap* hashMap,void* key,void* value){
     insert(temp->dList, temp->dList->length+1, hashData);  
     return 1;
 };
+
 void *getValue(HashMap *hashMap,Bucket *temp,void *key){
     HashData * hashData;    
     Iterator *it = getIterator((temp->dList));    
@@ -111,37 +119,48 @@ int removeHashData(HashMap* hashMap, void* key){
     return executeIteratorForRemoveValue(hashMap,key,temp);
 };
 
-Iterator getKeys(HashMap* hashMap){
-  int i;Bucket *temp;Iterator *it;
-  HashData *hashData;
-  List *keyList = (List *)malloc(sizeof(List));
-  keyList = create();
-   for(i = 0;i<hashMap->capacity;i++){
+List *insertKeysIntoList(HashMap *hashMap,List *list){
+    int i;Bucket *temp;Iterator *it;HashData *hashData;
+    for(i = 0;i<hashMap->capacity;i++){
         temp = (Bucket*)hashMap->buckets[i];
         it= getIterator(temp->dList);        
         while(it->hasNext(it)){
             hashData = it->next(it);
-         insert(keyList, keyList->length+1, hashData->key);    
+            insert(list, list->length+1, hashData->key);    
         };
     };
-    it = getIterator(keyList);
-    return *it;
+    return list;
 };
-Iterator getValues(HashMap* hashMap){
-  int i;Bucket *temp;Iterator *it;
-  HashData *hashData;
-  List *valuesList = (List *)malloc(sizeof(List));
-  valuesList = create();
-   for(i = 0;i<hashMap->capacity;i++){
+
+List *insertValuesIntoList(HashMap *hashMap,List *list){
+    int i;Bucket *temp;Iterator *it;HashData *hashData;
+    for(i = 0;i<hashMap->capacity;i++){
         temp = (Bucket*)hashMap->buckets[i];
         it= getIterator(temp->dList);        
         while(it->hasNext(it)){
             hashData = it->next(it);
-         insert(valuesList, valuesList->length+1, hashData);    
+            insert(list, list->length+1, hashData);    
         };
     };
-    it = getIterator(valuesList);
-    return *it;
+    return list;
+};
+
+Iterator getKeys(HashMap* hashMap){
+    Iterator *it;
+    List *keyList = (List *)malloc(sizeof(List));
+    keyList = create();
+    keyList = insertKeysIntoList(hashMap,keyList);
+    it = getIterator(keyList);
+    return *it;    
+};
+
+Iterator getValues(HashMap* hashMap){
+    Iterator *it;
+    List *ValuesList = (List *)malloc(sizeof(List));
+    ValuesList = create();
+    ValuesList = insertValuesIntoList(hashMap,ValuesList);
+    it = getIterator(ValuesList);
+    return *it;  
 };
 
 void disposeHash(HashMap* hashMap){
