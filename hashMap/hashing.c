@@ -50,8 +50,13 @@ HashData* createHashData(void *key ,void *value){
     hashData->key=(void*)key;
     return hashData;
 };
-void executeIterator(){
-
+void executeIterator(HashMap *hashMap,Iterator it,HashData *hashData,void *key,void *value){
+    Iterator *itPtr = &it;
+    put(hashMap,key,value);
+        while(itPtr->hasNext(itPtr)){
+        hashData = itPtr->next(itPtr);
+        put(hashMap,hashData->key,hashData->value);
+        };
 };
 void checkForRehashing(HashMap *hashMap,Bucket *temp,HashData *hashData,void *key,void *value){
     Iterator it,*itPtr;
@@ -59,11 +64,7 @@ void checkForRehashing(HashMap *hashMap,Bucket *temp,HashData *hashData,void *ke
     it = getValues(hashMap);
     itPtr = &it;
     hashMap->buckets = reHashing(hashMap);
-    put(hashMap,key,value);
-        while(itPtr->hasNext(itPtr)){
-        hashData = itPtr->next(itPtr);
-        put(hashMap,hashData->key,hashData->value);
-        };
+    executeIterator(hashMap,it,hashData,key,value);
     };
     return ;
 };
