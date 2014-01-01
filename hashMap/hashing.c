@@ -20,14 +20,18 @@ void *createList(int capacity){
 	void **base;
 	return base = calloc(sizeof(void*),capacity);
 };
+void **assignListToeveryBucket(int capacity){
+   int i; 
+    void **base = createList(capacity);
+    for (i = 0; i < capacity; ++i)
+    base[i]=createBucket();
+    return base;
+};
 
 HashMap createHashMap(HashCodeGenerator *getHashCode, compareKeys *cmp,int capacity){
 	Bucket start;
 	HashMap hashMap;int i;
-	void **base = createList(capacity);
-    for (i = 0; i < capacity; ++i)
-        base[i]=createBucket();
-    hashMap.buckets = base;
+	hashMap.buckets = assignListToeveryBucket(capacity);
     hashMap.getHashCode = getHashCode;
 	hashMap.cmp = cmp;
 	hashMap.capacity = capacity;
@@ -37,10 +41,7 @@ void ** reHashing(HashMap *hashMap){
     int i;void **base;
     hashMap->capacity = hashMap->capacity*2;
     free(hashMap->buckets);
-    base = createList(hashMap->capacity);
-    for (i = 0; i < hashMap->capacity; ++i)
-        base[i]=createBucket();
-    hashMap->buckets = base;
+    hashMap->buckets = assignListToeveryBucket(hashMap->capacity);;
     return hashMap->buckets;
 };
 HashData* createHashData(void *key ,void *value){
@@ -53,10 +54,10 @@ HashData* createHashData(void *key ,void *value){
 void executeIterator(HashMap *hashMap,Iterator it,HashData *hashData,void *key,void *value){
     Iterator *itPtr = &it;
     put(hashMap,key,value);
-        while(itPtr->hasNext(itPtr)){
+    while(itPtr->hasNext(itPtr)){
         hashData = itPtr->next(itPtr);
         put(hashMap,hashData->key,hashData->value);
-        };
+    };
 };
 void checkForRehashing(HashMap *hashMap,Bucket *temp,HashData *hashData,void *key,void *value){
     Iterator it,*itPtr;
