@@ -94,19 +94,21 @@ void *get(HashMap *hashMap,void *key){
     Bucket * temp=(Bucket*)hashMap->buckets[userKey];
     return getValue(hashMap,temp,key);
 };
-
-int removeHashData(HashMap* hashMap, void* key){
-    int count = 0;
-    int userKey=hashMap->getHashCode(key,hashMap->capacity);
-    Bucket * temp = (Bucket*)hashMap->buckets[userKey];
-    Iterator *it = getIterator((temp->dList));
-    HashData * hashData;
+int executeIteratorForRemoveValue(HashMap* hashMap, void* key,Bucket *temp){
+    HashData * hashData; int count =0;   
+    Iterator *it = getIterator((temp->dList));    
     while(it->hasNext(it)){
         count++;        
         hashData = it->next(it);
         if(hashMap->cmp(hashData->key,(void*)key)==0) return Remove(temp->dList,count++);
     };
     return 0;
+};
+
+int removeHashData(HashMap* hashMap, void* key){
+    int userKey=hashMap->getHashCode(key,hashMap->capacity);
+    Bucket * temp = (Bucket*)hashMap->buckets[userKey];
+    return executeIteratorForRemoveValue(hashMap,key,temp);
 };
 
 Iterator getKeys(HashMap* hashMap){
