@@ -1,6 +1,7 @@
 #include "testUtils.h"
 #include "hashing.h"
 #include <stdlib.h>
+#include <string.h>
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 typedef struct{
     int key;
@@ -14,8 +15,8 @@ Intern sandesh = {23124,"sandesh"};
 Intern manish = {23125,"manish"};
 
 
-int hashCodeGenerater(void* key){
-	return  *(int*)key%10;
+int hashCodeGenerater(void* key,int capacity){
+	return  *(int*)key%capacity;
 };
 
 int comparater(void *first ,void *second){
@@ -27,14 +28,12 @@ void test_createHashMap_shuld_create_hash_map(){
 	hashMap = createHashMap(hashCodeGenerater,comparater,10);
 	ASSERT(hashMap.capacity == 10);
   disposeHash(&hashMap);
-  
 };
 void test_put_element_to_bucket(){
 	HashMap hashMap = createHashMap(hashCodeGenerater,comparater,10);	
   void *data;
 	ASSERT(put(&hashMap, &uday.key, &uday.value) == 1);
   disposeHash(&hashMap);
-
 };
 
 void test_put_element_to_bucket_and_get_element(){

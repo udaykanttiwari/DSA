@@ -32,11 +32,11 @@ HashMap createHashMap(HashCodeGenerator *getHashCode, compareKeys *cmp,int capac
 	return hashMap;
 };
 int put(HashMap* hashMap,void* key,void* value){
-    int userKey=hashMap->getHashCode(key);
-    Iterator *it;
-    HashData* data1;
-    Bucket * temp=(Bucket*)hashMap->buckets[userKey];
-    HashData *hashData=malloc(sizeof(HashData));
+    int userKey=hashMap->getHashCode(key,hashMap->capacity);
+    Iterator *it;Bucket * temp;
+    HashData *hashData;
+    temp=(Bucket*)hashMap->buckets[userKey];
+    hashData=malloc(sizeof(HashData));
     hashData->value=(void*)value;
     hashData->key=(void*)key;
     insert(temp->dList, temp->dList->length+1, hashData);  
@@ -44,7 +44,7 @@ int put(HashMap* hashMap,void* key,void* value){
 };
 
 void *get(HashMap *hashMap,void *key){
-    int userKey=hashMap->getHashCode(key);
+    int userKey=hashMap->getHashCode(key,hashMap->capacity);
     Bucket * temp=(Bucket*)hashMap->buckets[userKey];
     Iterator *it = getIterator((temp->dList));
     HashData * hashData;
@@ -58,7 +58,7 @@ void *get(HashMap *hashMap,void *key){
 
 int removeHashData(HashMap* hashMap, void* key){
     int count = 0;
-    int userKey=hashMap->getHashCode(key);
+    int userKey=hashMap->getHashCode(key,hashMap->capacity);
     Bucket * temp = (Bucket*)hashMap->buckets[userKey];
     Iterator *it = getIterator((temp->dList));
     HashData * hashData;
@@ -86,15 +86,31 @@ Iterator getKeys(HashMap* hashMap){
     it = getIterator(keyList);
     return *it;
 };
+Iterator getValues(HashMap* hashMap){
+  int i;Bucket *temp;Iterator *it;
+  HashData *hashData;
+  List *valuesList = (List *)malloc(sizeof(List));
+  valuesList = create();
+   for(i = 0;i<hashMap->capacity;i++){
+        temp = (Bucket*)hashMap->buckets[i];
+        it= getIterator(temp->dList);        
+        while(it->hasNext(it)){
+            hashData = it->next(it);
+         insert(valuesList, valuesList->length+1, hashData);    
+        };
+    };
+    it = getIterator(valuesList);
+    return *it;
+};
 
 void disposeHash(HashMap* hashMap){
     Bucket * temp;
     int i;
     Iterator it;
-    for(i = 0; i < hashMap->capacity; ++i)        {
+    for(i = 0; i < hashMap->capacity; i++){
         temp=(Bucket*)hashMap->buckets[i];
         free(temp->dList);
     };
     free(hashMap->buckets);
-}
+};
  
