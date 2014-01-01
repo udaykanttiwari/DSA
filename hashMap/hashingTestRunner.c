@@ -84,6 +84,11 @@ int main(){
 		test_put_element_into_bucket_and_get_all_keys();
 	tearDown();
 	testEnded();
+	testStarted("test_put_element_to_bucket_and_rehash");
+	setup();
+		test_put_element_to_bucket_and_rehash();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

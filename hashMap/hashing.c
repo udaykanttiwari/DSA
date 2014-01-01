@@ -1,5 +1,6 @@
 #include "hashing.h"
 #include <stdlib.h>
+Iterator getValues(HashMap* hashMap);
 
 typedef struct{
     void* key;
@@ -19,6 +20,7 @@ void *createList(int capacity){
 	void **base;
 	return base = calloc(sizeof(void*),capacity);
 };
+
 HashMap createHashMap(HashCodeGenerator *getHashCode, compareKeys *cmp,int capacity){
 	Bucket start;
 	HashMap hashMap;int i;
@@ -31,18 +33,36 @@ HashMap createHashMap(HashCodeGenerator *getHashCode, compareKeys *cmp,int capac
 	hashMap.capacity = capacity;
 	return hashMap;
 };
+void ** reHashing(HashMap *hashMap){
+    int i;void **base;
+    hashMap->capacity = hashMap->capacity*2;
+    base = createList(hashMap->capacity);
+    for (i = 0; i < hashMap->capacity; ++i)
+        base[i]=createBucket();
+    hashMap->buckets = base;
+    return hashMap->buckets;
+};
 int put(HashMap* hashMap,void* key,void* value){
     int userKey=hashMap->getHashCode(key,hashMap->capacity);
-    Iterator *it;Bucket * temp;
+    Iterator it ,*itPtr;Bucket * temp;
     HashData *hashData;
     temp=(Bucket*)hashMap->buckets[userKey];
     hashData=malloc(sizeof(HashData));
     hashData->value=(void*)value;
     hashData->key=(void*)key;
+    if(temp->dList->length+1>2){
+        it = getValues(hashMap);
+        itPtr = &it;
+        hashMap->buckets = reHashing(hashMap);
+        put(hashMap,key,value);
+        while(itPtr->hasNext(itPtr)){
+            hashData = itPtr->next(itPtr);
+            put(hashMap,hashData->key,hashData->value);
+        };
+    };
     insert(temp->dList, temp->dList->length+1, hashData);  
     return 1;
 };
-
 void *get(HashMap *hashMap,void *key){
     int userKey=hashMap->getHashCode(key,hashMap->capacity);
     Bucket * temp=(Bucket*)hashMap->buckets[userKey];
